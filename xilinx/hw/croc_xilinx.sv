@@ -11,7 +11,7 @@
 
 `ifdef TARGET_PYNQZ1
   `define USE_SINGLE_CLOCK_SRC
-  `define USE_RESETN
+  `define USE_RESET
   // `define USE_STATUS
   `define USE_SWITCHES
   `define USE_LEDS
