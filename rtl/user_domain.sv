@@ -58,8 +58,8 @@ module user_domain import user_pkg::*; import croc_pkg::*; #(
   assign user_error_obi_req              = all_user_sbr_obi_req[UserError];
   assign all_user_sbr_obi_rsp[UserError] = user_error_obi_rsp;
 
-	assign user_rom_obi_req = all_user_sbr_obi_req[UserRom];
-  assign all_user_sbr_obi_rsp[UserRom] = user_rom_obi_rsp;
+	assign user_alu_obi_req = all_user_sbr_obi_req[UserAlu];
+  assign all_user_sbr_obi_rsp[UserAlu] = user_alu_obi_rsp;
 
 
   //-----------------------------------------------------------------------------------------------
