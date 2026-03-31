@@ -1,5 +1,6 @@
 # This script was generated automatically by bender.
-set ROOT "set_your_root_path_here"
+# set ROOT "set_your_root_path_here"
+set ROOT "/home/fauzan/pau/workspace/croc-pulp/croc"
 add_files -norecurse -fileset [current_fileset] [list \
     $ROOT/rtl/tech_cells_generic/fpga/pad_functional_xilinx.sv \
     $ROOT/rtl/tech_cells_generic/fpga/tc_clk_xilinx.sv \
@@ -184,6 +185,11 @@ add_files -norecurse -fileset [current_fileset] [list \
     $ROOT/rtl/croc_domain.sv \
     $ROOT/rtl/user_domain.sv \
     $ROOT/rtl/croc_soc.sv \
+]
+
+# [INFO] Add your custom IP Here
+add_files -norecurse -fileset [current_fileset] [list \
+    $ROOT/rtl/user_domain/simple_alu.sv \
 ]
 add_files -norecurse -fileset [current_fileset] [list \
     $ROOT/xilinx/hw/croc_xilinx.sv \
