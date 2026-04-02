@@ -11,7 +11,9 @@ PYTHON3   ?= python3
 # Change the VERILATOR path to your verilator installation path.
 # If you use ubuntu and install it with package manager apt,
 # most likely it would be in the following path
-VERILATOR ?= /usr/bin/verilator
+# VERILATOR ?= /usr/bin/verilator
+# or here
+VERILATOR ?= /usr/local/bin/verilator
 YOSYS     ?= yosys
 OPENROAD  ?= openroad
 KLAYOUT   ?= klayout
@@ -99,14 +101,14 @@ VERILATOR_ARGS += --binary -j 0
 VERILATOR_ARGS += --timing --autoflush --trace-fst --trace-threads 2 --trace-structs
 VERILATOR_ARGS +=  --unroll-count 1 --unroll-stmts 1
 VERILATOR_ARGS += --x-assign fast --x-initial fast
-VERILATOR_CFLAGS += -O3 -march=native -mtune=native
+VERILATOR_CFLAGS += -O3 -march=native -mtune=native -std=c++20 -fcoroutines
 
 verilator/croc.f: Bender.lock Bender.yml
 	rm -f $@
 	$(BENDER) script verilator -t rtl -t verilator -DSYNTHESIS -DVERILATOR > $@
 
 verilator/obj_dir/Vtb_croc_soc: verilator/croc.f $(SW_HEX)
-	cd verilator; $(VERILATOR) $(VERILATOR_ARGS) -O3 --top tb_croc_soc -f croc.f
+	cd verilator; $(VERILATOR) $(VERILATOR_ARGS) -CFLAGS "$(VERILATOR_CFLAGS)" --top tb_croc_soc -f croc.f
 
 ## Simulate RTL using Verilator
 verilator: verilator/obj_dir/Vtb_croc_soc
